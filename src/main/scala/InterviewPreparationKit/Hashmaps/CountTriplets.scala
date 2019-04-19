@@ -1,11 +1,11 @@
 package InterviewPreparationKit.Hashmaps
 
-import scala.collection.mutable
+import scala.collection.mutable.HashMap
 
 class CountTriplets extends {
   def countTriplets(arr: Array[Long], r: Long): Long = {
-    val holdingMap: mutable.HashMap[Long, Long] = mutable.HashMap[Long, Long]()
-    val tripletMap: mutable.HashMap[Long, Long] = mutable.HashMap[Long, Long]()
+    val holdingMap: HashMap[Long, Long] = HashMap[Long, Long]()
+    val tripletMap: HashMap[Long, Long] = HashMap[Long, Long]()
     var totalCount: Long = 0
     for(value <- arr){
       if(tripletMap.contains(value)) totalCount += tripletMap(value)
