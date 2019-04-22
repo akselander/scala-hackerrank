@@ -2,7 +2,7 @@ package InterviewPreparationKit.Sorting
 
 class FraudulentActivityNotifications {
   def activityNotifications(expenditure: Array[Int], d: Int): Int = {
-    val count: Array[Int] = Array.fill[Int](201)(git 0)
+    val count: Array[Int] = Array.fill[Int](201)(0)
     (0 until d).foreach(i => count(expenditure(i)) += 1)
     var notifications: Int = 0
     (d until expenditure.length).foreach{ i =>
