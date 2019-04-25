@@ -20,23 +20,26 @@ class LuckBalance {
     luckBalance
   }
 
+
+ //seems to fail few cases
   def luckBalance2(k: Int, contests: Array[Array[Int]]): Int = {
     var luckBalance: Int = 0
     var importantContests: mutable.PriorityQueue[Int] = new mutable.PriorityQueue[Int]
     contests.foreach(e => {
       if(e(1) == 0) luckBalance += e(0)
       else {
-        importantContests += e(0)
-        if(importantContests.length > k) {val reverseIC = importantContests.reverse
-          luckBalance -= reverseIC.dequeue
-          importantContests = reverseIC.reverse
+        
+        val tempHeap: mutable.PriorityQueue[Int] = importantContests.clone
+        tempHeap += e(0)
+        if(tempHeap.length > k){
+          importantContests.dequeueAll
+          (0 until k).foreach(_ => importantContests += tempHeap.dequeue)
+          (0 until tempHeap.length).foreach(_ => luckBalance -= tempHeap.dequeue)
         }
+        else importantContests = tempHeap.clone
       }
     })
-    println(importantContests)
-    for(i <- 0 until k){
-      luckBalance += importantContests.dequeue
-    }
+    (0 until k).foreach(_ => luckBalance += importantContests.dequeue)
     luckBalance
   }
 }
